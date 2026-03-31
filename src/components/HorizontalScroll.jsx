@@ -37,7 +37,7 @@ export default function HorizontalScroll({ children, headline, endText, classNam
       const progress = Math.min(1, Math.max(0, scrolled / scrollable));
 
       const offset = panelWidth - progress * travelDistance;
-      track.style.transform = `translateX(${offset}px)`;
+      track.style.transform = `translate3d(${offset}px, 0, 0)`;
 
       // Headline fades out: 0.60 → 0.72
       if (leftPanelRef.current) {

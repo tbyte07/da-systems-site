@@ -233,6 +233,12 @@
   will-change: transform;
   flex-shrink: 0;
   min-width: max-content;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.horizontal-scroll-sticky {
+  transform: translateZ(0);
 }
 
 .h-card {

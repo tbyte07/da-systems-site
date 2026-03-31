@@ -384,7 +384,7 @@ export default function App() {
         {/* Slow-scroll zone: tall container, sticky content */}
         <div ref={vorteileSlowRef} className="vorteile-slow">
           <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", padding: "0 2rem" }}>
-            <div className="w-full max-w-5xl mx-auto">
+            <div className="w-full max-w-5xl mx-auto pt-20 md:pt-0">
               <p className="text-[11px] tracking-[0.14em] uppercase text-[#8a95ff] mb-4 text-center">Deine Vorteile</p>
               <h2 className="text-[clamp(24px,2.5vw,38px)] font-normal tracking-[-0.02em] leading-tight mb-10 text-center">
                 Was du erhälst, mit uns als{" "}
