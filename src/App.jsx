@@ -153,7 +153,7 @@ export default function App() {
           </ul>
 
           <Button variant="nav" size="sm" asChild>
-            <a href="#cta">Gespräch buchen</a>
+            <a href="#cta">Demo buchen</a>
           </Button>
         </nav>
       </div>
