@@ -190,7 +190,7 @@ export default function App() {
         />
 
         {/* Content */}
-        <div className="relative z-10 px-6 pt-32 pb-24 max-w-[920px] mx-auto flex flex-col items-center">
+        <div className="relative z-10 px-6 pt-16 md:pt-32 pb-24 max-w-[920px] mx-auto flex flex-col items-center">
           <div className="animate-fade-up-1">
             <Badge className="mb-8">
               <span
@@ -232,14 +232,6 @@ export default function App() {
       <section id="context" className="relative z-10">
         {/* Top fade from hero */}
         <div className="pointer-events-none absolute top-0 left-0 right-0 z-20" style={{ height: 180, background: "linear-gradient(to bottom, #000 0%, transparent 100%)" }} />
-
-        {/* Mobile-only headline (hs-left is hidden on mobile) */}
-        <div className="md:hidden px-8 pt-24 pb-2">
-          <p className="text-[11px] tracking-[0.14em] uppercase text-[#8a95ff] mb-4">Das Problem</p>
-          <h2 className="text-[clamp(32px,8vw,48px)] font-normal tracking-[-0.03em] leading-tight">
-            Erkennst du dich <span className="font-display text-[#8a95ff]">darin?</span>
-          </h2>
-        </div>
 
         <HorizontalScroll
           endText={

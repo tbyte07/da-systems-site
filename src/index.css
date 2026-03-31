@@ -330,8 +330,19 @@
   /* Nav */
   .nav-links { display: none; }
 
-  /* HorizontalScroll: hide left panel, cards fill full width */
-  .hs-left { display: none; }
+  /* HorizontalScroll: headline at top, cards track below */
+  .horizontal-scroll-sticky { flex-direction: column; }
+  .hs-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    padding: 88px 24px 14px;
+  }
   .horizontal-scroll-track { padding: 0 16px; gap: 12px; }
   .h-card { padding: 28px 24px 32px; height: 300px; }
 
@@ -344,9 +355,28 @@
   /* Service cards */
   .dienst-card { padding: 22px 20px 18px !important; }
 
-  /* Leistungen grid: tighter columns on mobile, panels visible */
+  /* Leistungen: single column — Grafik → Karte → Trennstrich */
   .leistungen-grid {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
+  .leistungen-panel-1     { order: 1; }
+  .leistungen-card-1      { order: 2; }
+  .leistungen-connector-1 { order: 3; }
+  .leistungen-panel-2     { order: 4; }
+  .leistungen-card-2      { order: 5; }
+  .leistungen-connector-2 { order: 6; }
+  .leistungen-panel-3     { order: 7; }
+  .leistungen-card-3      { order: 8; }
+
+  /* Connectors werden zu Trennstrichen */
+  .leistungen-connector-1,
+  .leistungen-connector-2 {
+    height: 0;
+    border-top: 1px solid rgba(138, 149, 255, 0.2);
+    margin: 4px 0;
+  }
+  .leistungen-connector-1 > *,
+  .leistungen-connector-2 > * { display: none; }
 }
