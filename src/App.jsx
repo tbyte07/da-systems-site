@@ -153,7 +153,7 @@ export default function App() {
           </ul>
 
           <Button variant="nav" size="sm" asChild>
-            <a href="https://calendly.com/da-systems/30min" target="_blank" rel="noopener noreferrer">Demo buchen</a>
+            <a href="https://form.typeform.com/to/CDaQjC50" target="_blank" rel="noopener noreferrer">Demo buchen</a>
           </Button>
         </nav>
       </div>
@@ -212,7 +212,7 @@ export default function App() {
 
           <div className="animate-fade-up-4 flex flex-wrap justify-center gap-3">
             <Button variant="default" asChild>
-              <a href="https://calendly.com/da-systems/30min" target="_blank" rel="noopener noreferrer">Jetzt starten</a>
+              <a href="https://form.typeform.com/to/CDaQjC50" target="_blank" rel="noopener noreferrer">Jetzt starten</a>
             </Button>
             <Button variant="ghost" asChild>
               <a href="#dienst">Was wir machen</a>
@@ -432,7 +432,7 @@ export default function App() {
 
           <div className="reveal flex flex-wrap justify-center gap-4">
             <Button variant="accent" size="lg" asChild>
-              <a href="https://calendly.com/da-systems/30min" target="_blank" rel="noopener noreferrer">Demo buchen</a>
+              <a href="https://form.typeform.com/to/CDaQjC50" target="_blank" rel="noopener noreferrer">Demo buchen</a>
             </Button>
             <Button variant="ghost" size="lg" asChild>
               <a href="mailto:hello@da-systems.de">Kontakt aufnehmen</a>
