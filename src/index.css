@@ -164,53 +164,6 @@
   }
 }
 
-/* ── Dienst Cards ───────────────────────────────────────────────────────── */
-.dienst-card {
-  background: linear-gradient(160deg, #16162a 0%, #0a0a12 100%);
-  border: 1.5px solid;
-  border-radius: 24px;
-  padding: 36px 32px 32px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.09) inset,
-    0 -1px 0 rgba(0,0,0,0.6) inset,
-    0 1px 0 rgba(255,255,255,0.04) inset,
-    0 24px 48px rgba(0,0,0,0.55),
-    0 6px 16px rgba(0,0,0,0.4),
-    0 1px 3px rgba(0,0,0,0.5);
-}
-
-.dienst-card:hover {
-  border-color: rgba(138, 149, 255, 0.45);
-  transform: translateY(-4px);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.12) inset,
-    0 -1px 0 rgba(0,0,0,0.6) inset,
-    0 32px 64px rgba(0,0,0,0.6),
-    0 8px 24px rgba(0,0,0,0.45),
-    0 0 40px rgba(138,149,255,0.1);
-}
-
-.dienst-card h3 {
-  min-height: unset;
-}
-
-.dienst-accent-bar {
-  height: 3px;
-  border-radius: 2px;
-  margin-bottom: 28px;
-  opacity: 0.85;
-}
-
-.dienst-icon-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  filter: drop-shadow(0 0 14px rgba(138, 149, 255, 0.35));
-}
-
 /* ── Horizontal Scroll Section ─────────────────────────────────────────── */
 .horizontal-scroll-section {
   /* Height set dynamically by JS based on total card width */
@@ -314,22 +267,130 @@
   align-items: center;
 }
 
-/* ── Leistungen Grid ────────────────────────────────────────────────────── */
-.leistungen-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  grid-template-rows: auto 36px auto 36px auto;
-  column-gap: 40px;
-  align-items: stretch;
+/* ── Phasen Cards (Crawl / Walk / Run) ─────────────────────────────────── */
+.phase-card {
+  position: relative;
+  background: linear-gradient(160deg, #16162a 0%, #0a0a12 100%);
+  border: 1px solid rgba(138, 149, 255, 0.22);
+  border-radius: 24px;
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease,
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.07) inset,
+    0 24px 48px rgba(0, 0, 0, 0.55),
+    0 6px 16px rgba(0, 0, 0, 0.4);
 }
-.leistungen-card-1 { grid-column: 1; grid-row: 1; }
-.leistungen-panel-1 { grid-column: 2; grid-row: 1; }
-.leistungen-connector-1 { grid-column: 2; grid-row: 2; }
-.leistungen-card-2 { grid-column: 1; grid-row: 3; }
-.leistungen-panel-2 { grid-column: 2; grid-row: 3; }
-.leistungen-connector-2 { grid-column: 2; grid-row: 4; }
-.leistungen-card-3 { grid-column: 1; grid-row: 5; }
-.leistungen-panel-3 { grid-column: 2; grid-row: 5; }
+
+.phase-card:hover {
+  border-color: rgba(138, 149, 255, 0.45);
+  transform: translateY(-4px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 32px 64px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(138, 149, 255, 0.1);
+}
+
+.phase-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #8a95ff 50%, transparent 100%);
+  opacity: 0.7;
+}
+
+.phase-label {
+  font-family: 'Dela Gothic One', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a95ff;
+  margin: 0 0 14px;
+}
+
+.phase-title {
+  font-family: 'Dela Gothic One', sans-serif;
+  font-size: clamp(28px, 2.4vw, 36px);
+  line-height: 1;
+  color: #fff;
+  margin: 0 0 6px;
+}
+
+.phase-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+
+.phase-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 20px;
+  min-height: 3.1em;
+}
+
+.phase-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(138, 149, 255, 0.25) 50%, transparent 100%);
+  margin: 0 0 16px;
+}
+
+.phase-outputs-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 12px;
+}
+
+.phase-outputs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.phase-outputs li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.phase-output-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(138, 149, 255, 0.7);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.phase-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.phase-connector-h {
+  padding: 0 10px;
+}
+.phase-connector-v {
+  padding: 8px 0;
+}
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
@@ -358,31 +419,7 @@
   .vorteil-card.from-right { transform: translateX(40px); }
   .vorteil-card.from-left  { transform: translateX(-40px); }
 
-  /* Service cards */
-  .dienst-card { padding: 22px 20px 18px !important; }
-
-  /* Leistungen: single column — Grafik → Karte → Trennstrich */
-  .leistungen-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .leistungen-panel-1     { order: 1; }
-  .leistungen-card-1      { order: 2; }
-  .leistungen-connector-1 { order: 3; }
-  .leistungen-panel-2     { order: 4; }
-  .leistungen-card-2      { order: 5; }
-  .leistungen-connector-2 { order: 6; }
-  .leistungen-panel-3     { order: 7; }
-  .leistungen-card-3      { order: 8; }
-
-  /* Connectors werden zu Trennstrichen */
-  .leistungen-connector-1,
-  .leistungen-connector-2 {
-    height: 0;
-    border-top: 1px solid rgba(138, 149, 255, 0.2);
-    margin: 4px 0;
-  }
-  .leistungen-connector-1 > *,
-  .leistungen-connector-2 > * { display: none; }
+  /* Phase cards on mobile */
+  .phase-card { padding: 26px 22px 22px; }
+  .phase-title { font-size: 28px; }
 }

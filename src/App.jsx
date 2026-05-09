@@ -1,12 +1,10 @@
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { Button } from "./components/ui/button";
 import { Card, CardHeader, CardContent } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
 import { Separator } from "./components/ui/separator";
 import ColorBends from "./components/ColorBends";
 import HorizontalScroll from "./components/HorizontalScroll";
-import PreviewGraphic from "./components/PreviewGraphic";
-import { VPanel1, VPanel2, VPanel3, VConnector } from "./components/PreviewGraphicVertical";
 import "./index.css";
 
 // ── Scroll Reveal ──────────────────────────────────────────────────────────
@@ -70,25 +68,33 @@ const contextItems = [
 ];
 
 const vorteile = [
-  { icon: <IconHeadache />, text: "Saubere und fehlerfreie Datenanalyse" },
-  { icon: <IconTarget />,   text: "Entscheidungen basieren auf Fakten" },
-  { icon: <IconBolt />,     text: "Fokus auf Aufgaben die Geld bringen" },
-  { icon: <IconSave />,     text: "Du sparst Ressourcen und teure Mitarbeiter" },
+  { icon: <IconHeadache />, text: "Null operativer Aufwand für dich." },
+  { icon: <IconTarget />,   text: "Du vermeidest falsche KI Implementierung." },
+  { icon: <IconBolt />,     text: "Wir nutzen unsere Systeme selbst." },
+  { icon: <IconSave />,     text: "Du sparst Zeit, Geld und Nerven." },
 ];
 
-// Reihenfolge entspricht der Grafik: Panel 1 → Panel 2 → Panel 3
-const dienste = [
+const phasen = [
   {
-    title: "Daten Architektur",
-    lines: ["Sammeln, Bereinigen, Berechnen und Kontrollieren deiner Daten", "Immer aktuell, Fehler werden direkt behoben"],
+    label: "01 · Crawl",
+    title: "Crawl",
+    subtitle: "Anfang der KI Implementierung.",
+    desc: "Wir starten mit einem klar abgegrenzten Anwendungsfall. Reporting, Dashboard oder Datenbereinigung.",
+    outputs: ["Reporting & Dashboards", "Datenbereinigung", "Erste Ad-hoc-Analysen"],
   },
   {
-    title: "Live Dashboard",
-    lines: ["Zeigt alle wichtigen Zahlen deines Unternehmens in Echtzeit", "Klarer Überblick ohne technisches Vorwissen"],
+    label: "02 · Walk",
+    title: "Walk",
+    subtitle: "KI übernimmt mehr.",
+    desc: "Deine Datenquellen laufen zentral zusammen. KI bekommt mehr Einblick und übernimmt Analyse-Aufgaben.",
+    outputs: ["Single Source of Truth", "Systematische KPI-Berechnung", "KI-gestützte Analysen"],
   },
   {
-    title: "KI Assistent",
-    lines: ["Beantwortet Datenfragen sofort auf Basis aktueller Daten", "Hilft bei Unklarheiten und ersetzt manuelle Abfragen"],
+    label: "03 · Run",
+    title: "Run",
+    subtitle: "KI ist fester Bestandteil.",
+    desc: "Multi-Agent-Systeme laufen eigenständig. Geplant, ereignisgesteuert, ohne manuelle Auslösung.",
+    outputs: ["Anomalie-Erkennung", "Automatisierte Reports", "Proaktive Insights"],
   },
 ];
 
@@ -203,11 +209,11 @@ export default function App() {
           </div>
 
           <h1 className="animate-fade-up-2 text-[clamp(34px,5vw,68px)] font-normal leading-[1.07] tracking-[-0.025em] mb-5">
-            Dein unfairer Vorteil ist<br /><span className="font-display">modernes Data & Analytics</span>
+            Wir machen deine<br /><span className="font-display">Datenanalyse und KI.</span>
           </h1>
 
-          <p className="animate-fade-up-3 text-[clamp(17px,1.4vw,21px)] text-white/75 mb-10 leading-relaxed max-w-[480px]">
-            Wir übernehmen den komplexen Scheiß, Du skallierst dein Unternemen
+          <p className="animate-fade-up-3 text-[clamp(17px,1.4vw,21px)] text-white/75 mb-10 leading-relaxed max-w-[520px]">
+            Du übergibst die Aufgabe. Das Ergebnis kommt zur vereinbarten Zeit.
           </p>
 
           <div className="animate-fade-up-4 flex flex-wrap justify-center gap-3">
@@ -260,121 +266,81 @@ export default function App() {
       </section>
 
       {/* ── Dienstleistung ─────────────────────────────────────────────── */}
-      <section id="dienst" className="relative z-10 py-24 px-8 md:px-16 overflow-hidden">
+      <section id="dienst" className="relative z-10 py-16 md:py-24 px-8 md:px-16 overflow-hidden">
 
-        <div className="relative max-w-5xl mx-auto">
-          <div className="reveal text-center mb-14">
+        <div className="relative max-w-6xl mx-auto">
+          <div className="reveal text-center mb-10 md:mb-14">
             <p className="text-[11px] tracking-[0.14em] uppercase text-[#8a95ff] mb-4">Die Lösung</p>
             <h2 className="text-[clamp(32px,4vw,56px)] font-normal tracking-[-0.02em] text-white leading-tight">
-              Was wir machen
+              Wir bringen KI in dein Unternehmen.<br />
+              <span className="text-white/85">Mit Köpfchen und Methode.</span>
             </h2>
           </div>
 
-          {/* Desktop: horizontal graphic + cards below */}
-          <div className="hidden md:block">
-            <div className="reveal mb-0">
-              <PreviewGraphic />
-            </div>
-            <div className="grid grid-cols-3 gap-5 mt-0">
-              {dienste.map((_, i) => (
-                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", height: 40 }}>
-                  <svg width="12" height="40" viewBox="0 0 12 40" fill="none">
-                    <line x1="6" y1="0" x2="6" y2="28" stroke="rgba(138,149,255,0.35)" strokeWidth="1" strokeDasharray="3 3" />
-                    <polygon points="2,28 10,28 6,38" fill="rgba(138,149,255,0.45)" />
-                  </svg>
-                </div>
-              ))}
-            </div>
-            <div className="grid grid-cols-3 gap-5">
-              {dienste.map((d, i) => (
-                <div key={i} className="reveal dienst-card" style={{ transitionDelay: `${i * 80}ms`, borderColor: "rgba(138,149,255,0.3)", padding: "22px 24px 20px" }}>
-                  <h3 className="font-display text-[clamp(22px,2vw,28px)] text-white leading-tight mb-2">
-                    {d.title.split(" ").map((word, w) => (
-                      <span key={w}>{word}{w < d.title.split(" ").length - 1 && <br />}</span>
-                    ))}
-                  </h3>
-                  <ul className="flex flex-col gap-2 list-none m-0 p-0 mt-auto">
-                    {d.lines.map((line, j) => (
-                      <li key={j} className="flex items-start gap-2.5 text-[15px] text-white/85 leading-snug">
-                        <span className="w-1 h-1 rounded-full bg-[#8a95ff]/70 flex-shrink-0 mt-[6px]" />
-                        {line}
+          {/* Desktop: 3 phases horizontally with arrows between */}
+          <div className="hidden md:flex items-stretch justify-center gap-0">
+            {phasen.map((p, i) => (
+              <Fragment key={p.title}>
+                <div className="reveal phase-card flex-1" style={{ transitionDelay: `${i * 150}ms` }}>
+                  <div className="phase-accent" />
+                  <p className="phase-label">{p.label}</p>
+                  <h3 className="phase-title">{p.title}</h3>
+                  <p className="phase-subtitle">{p.subtitle}</p>
+                  <p className="phase-desc">{p.desc}</p>
+                  <div className="phase-divider" />
+                  <p className="phase-outputs-label">Was du bekommst</p>
+                  <ul className="phase-outputs">
+                    {p.outputs.map((o) => (
+                      <li key={o}>
+                        <span className="phase-output-dot" aria-hidden="true" />
+                        {o}
                       </li>
                     ))}
                   </ul>
                 </div>
-              ))}
-            </div>
+                {i < phasen.length - 1 && (
+                  <div className="phase-connector phase-connector-h reveal" style={{ transitionDelay: `${i * 150 + 75}ms` }} aria-hidden="true">
+                    <svg width="48" height="14" viewBox="0 0 48 14" fill="none">
+                      <line x1="0" y1="7" x2="38" y2="7" stroke="rgba(138,149,255,0.45)" strokeWidth="1" strokeDasharray="3 3" />
+                      <polygon points="38,2 38,12 46,7" fill="rgba(138,149,255,0.6)" />
+                    </svg>
+                  </div>
+                )}
+              </Fragment>
+            ))}
           </div>
 
-          {/* Mobile: vertical graphic right, cards left */}
-          <div className="md:hidden leistungen-grid">
-
-            {/* Card 1 */}
-            <div className="reveal dienst-card leistungen-card-1" style={{ borderColor: "rgba(138,149,255,0.3)", padding: "22px 24px 20px" }}>
-              <h3 className="font-display text-[clamp(22px,2vw,28px)] text-white leading-tight mb-2">
-                Daten<br />Architektur
-              </h3>
-              <ul className="flex flex-col gap-2 list-none m-0 p-0 mt-auto">
-                {dienste[0].lines.map((line, j) => (
-                  <li key={j} className="flex items-start gap-2.5 text-[15px] text-white/85 leading-snug">
-                    <span className="w-1 h-1 rounded-full bg-[#8a95ff]/70 flex-shrink-0 mt-[6px]" />
-                    {line}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Panel 1 */}
-            <div className="leistungen-panel-1 reveal" style={{ transitionDelay: "80ms" }}>
-              <VPanel1 />
-            </div>
-
-            {/* Connector 1 → 2 */}
-            <div className="leistungen-connector-1"><VConnector /></div>
-
-            {/* Card 2 */}
-            <div className="reveal dienst-card leistungen-card-2" style={{ borderColor: "rgba(138,149,255,0.3)", padding: "22px 24px 20px", transitionDelay: "40ms" }}>
-              <h3 className="font-display text-[clamp(22px,2vw,28px)] text-white leading-tight mb-2">
-                Live<br />Dashboard
-              </h3>
-              <ul className="flex flex-col gap-2 list-none m-0 p-0 mt-auto">
-                {dienste[1].lines.map((line, j) => (
-                  <li key={j} className="flex items-start gap-2.5 text-[15px] text-white/85 leading-snug">
-                    <span className="w-1 h-1 rounded-full bg-[#8a95ff]/70 flex-shrink-0 mt-[6px]" />
-                    {line}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Panel 2 */}
-            <div className="leistungen-panel-2 reveal" style={{ transitionDelay: "120ms" }}>
-              <VPanel2 />
-            </div>
-
-            {/* Connector 2 → 3 */}
-            <div className="leistungen-connector-2"><VConnector /></div>
-
-            {/* Card 3 */}
-            <div className="reveal dienst-card leistungen-card-3" style={{ borderColor: "rgba(138,149,255,0.3)", padding: "22px 24px 20px", transitionDelay: "80ms" }}>
-              <h3 className="font-display text-[clamp(22px,2vw,28px)] text-white leading-tight mb-2">
-                KI<br />Assistent
-              </h3>
-              <ul className="flex flex-col gap-2 list-none m-0 p-0 mt-auto">
-                {dienste[2].lines.map((line, j) => (
-                  <li key={j} className="flex items-start gap-2.5 text-[15px] text-white/85 leading-snug">
-                    <span className="w-1 h-1 rounded-full bg-[#8a95ff]/70 flex-shrink-0 mt-[6px]" />
-                    {line}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Panel 3 */}
-            <div className="leistungen-panel-3 reveal" style={{ transitionDelay: "160ms" }}>
-              <VPanel3 />
-            </div>
-
+          {/* Mobile: vertical stack with arrows between */}
+          <div className="md:hidden flex flex-col">
+            {phasen.map((p, i) => (
+              <Fragment key={p.title}>
+                <div className="reveal phase-card" style={{ transitionDelay: `${i * 150}ms` }}>
+                  <div className="phase-accent" />
+                  <p className="phase-label">{p.label}</p>
+                  <h3 className="phase-title">{p.title}</h3>
+                  <p className="phase-subtitle">{p.subtitle}</p>
+                  <p className="phase-desc">{p.desc}</p>
+                  <div className="phase-divider" />
+                  <p className="phase-outputs-label">Was du bekommst</p>
+                  <ul className="phase-outputs">
+                    {p.outputs.map((o) => (
+                      <li key={o}>
+                        <span className="phase-output-dot" aria-hidden="true" />
+                        {o}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {i < phasen.length - 1 && (
+                  <div className="phase-connector phase-connector-v" aria-hidden="true">
+                    <svg width="14" height="40" viewBox="0 0 14 40" fill="none">
+                      <line x1="7" y1="0" x2="7" y2="30" stroke="rgba(138,149,255,0.45)" strokeWidth="1" strokeDasharray="3 3" />
+                      <polygon points="2,30 12,30 7,38" fill="rgba(138,149,255,0.6)" />
+                    </svg>
+                  </div>
+                )}
+              </Fragment>
+            ))}
           </div>
         </div>
       </section>
