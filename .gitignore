@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Claude Code
+.claude/
+
+# Test/review artifacts
+test-results/
+playwright-report/
+dienst_*.png
