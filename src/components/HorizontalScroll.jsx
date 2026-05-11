@@ -15,69 +15,75 @@ export default function HorizontalScroll({ children, headline, endText, classNam
     if (!section || !track || !rightPanel) return;
 
     let ticking = false;
+    let activeCard = null;
+
+    const cache = {
+      panelWidth: 0,
+      totalCardsWidth: 0,
+      travelDistance: 0,
+      sectionHeight: 0,
+      windowHeight: 0,
+      scrollable: 0,
+      panelCenter: 0,
+      cards: [],
+    };
 
     const init = () => {
-      const panelWidth = rightPanel.clientWidth;
-      const totalCardsWidth = track.scrollWidth;
-      // Extra travel so end text stays visible longer
-      const travelDistance = totalCardsWidth + panelWidth * 2;
-      section.style.height = `${travelDistance + window.innerHeight}px`;
+      cache.panelWidth = rightPanel.clientWidth;
+      cache.totalCardsWidth = track.scrollWidth;
+      cache.travelDistance = cache.totalCardsWidth + cache.panelWidth * 2;
+      cache.windowHeight = window.innerHeight;
+      cache.panelCenter = cache.panelWidth / 2;
+      section.style.height = `${cache.travelDistance + cache.windowHeight}px`;
+      cache.sectionHeight = section.offsetHeight;
+      cache.scrollable = cache.sectionHeight - cache.windowHeight;
+      cache.cards = Array.from(track.querySelectorAll(".h-card")).map((el) => ({
+        el,
+        offsetLeft: el.offsetLeft,
+        offsetWidth: el.offsetWidth,
+        halfWidth: el.offsetWidth / 2,
+      }));
     };
 
     const update = () => {
       const top = section.getBoundingClientRect().top;
-      const sectionHeight = section.offsetHeight;
-      const windowHeight = window.innerHeight;
-      const panelWidth = rightPanel.clientWidth;
-      const totalCardsWidth = track.scrollWidth;
-      const travelDistance = totalCardsWidth + panelWidth * 2;
-
       const scrolled = -top;
-      const scrollable = sectionHeight - windowHeight;
-      const progress = Math.min(1, Math.max(0, scrolled / scrollable));
+      const progress = Math.min(1, Math.max(0, scrolled / cache.scrollable));
 
-      const offset = panelWidth - progress * travelDistance;
+      const offset = cache.panelWidth - progress * cache.travelDistance;
       track.style.transform = `translate3d(${offset}px, 0, 0)`;
 
-      // Headline fades out: 0.60 → 0.72
       if (leftPanelRef.current) {
         const outProgress = Math.min(1, Math.max(0, (progress - 0.60) / 0.12));
         leftPanelRef.current.style.opacity = 1 - outProgress;
         leftPanelRef.current.style.transform = `translateY(${outProgress * -20}px)`;
       }
 
-      // End text fades in: 0.78 → 0.90
       if (endTextRef.current) {
         const endProgress = Math.min(1, Math.max(0, (progress - 0.78) / 0.12));
         endTextRef.current.style.opacity = endProgress;
         endTextRef.current.style.transform = `translateY(${(1 - endProgress) * 28}px)`;
       }
 
-      // Blur fades out: 0.55 → 0.72 (fully gone before end text appears)
       if (blurRef.current) {
         const blurOut = Math.min(1, Math.max(0, (progress - 0.55) / 0.17));
         blurRef.current.style.opacity = 1 - blurOut;
       }
 
-      // Highlight card closest to center of right panel
-      const panelCenter = panelWidth / 2;
-      const cards = track.querySelectorAll(".h-card");
-      let closestCard = null;
+      let closest = null;
       let closestDist = Infinity;
-
-      cards.forEach((card) => {
-        const cardLeft = card.offsetLeft + offset;
-        const cardCenter = cardLeft + card.offsetWidth / 2;
-        const dist = Math.abs(cardCenter - panelCenter);
+      for (const c of cache.cards) {
+        const dist = Math.abs(c.offsetLeft + offset + c.halfWidth - cache.panelCenter);
         if (dist < closestDist) {
           closestDist = dist;
-          closestCard = card;
+          closest = c;
         }
-      });
-
-      cards.forEach((card) => card.classList.remove("h-card--active"));
-      if (closestCard && closestDist < closestCard.offsetWidth * 0.65) {
-        closestCard.classList.add("h-card--active");
+      }
+      const newActive = closest && closestDist < closest.offsetWidth * 0.65 ? closest.el : null;
+      if (newActive !== activeCard) {
+        if (activeCard) activeCard.classList.remove("h-card--active");
+        if (newActive) newActive.classList.add("h-card--active");
+        activeCard = newActive;
       }
 
       ticking = false;
